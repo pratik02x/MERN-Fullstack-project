@@ -12,6 +12,7 @@ function Login() {
     const navigate=useNavigate();
     const{loginstatus,setloginstatus}=useContext(LoginContext);
     const{username,setusername}=useContext(LoginContext);
+    const{userrole,setuserrole}=useContext(LoginContext)
     const signin=async (event)=>{
 
     const result= await loginUser(email,password);
@@ -25,6 +26,7 @@ function Login() {
         if(result.status=="success"){
             setloginstatus(true);
             setusername(result.data.email)
+            setuserrole(result.data.role)
             sessionStorage.setItem("token",result.data.token);
             navigate("/home");
             toast.success("login successfull");

@@ -2,12 +2,14 @@ import React, { useState } from 'react'
 import { toast } from 'react-toastify';
 import { userUpdatePassword } from '../services/userServices';
 import { Link } from 'react-router';
+import { useNavigate } from 'react-router';
  
 function UpdatePassword() {
 
     const [oldpassword,setoldpassword]=useState("");
     const [newpassword,setnewpassword]=useState("");
     const [confirmpassword,setconfirmpassword]=useState("");
+    const navigate=useNavigate();
 
    const cupdatepassword=async ()=>{
 
@@ -15,7 +17,9 @@ function UpdatePassword() {
     
 
     if(result.status=="success"){
+      
         toast.success("password updated");
+        navigate("/student");
     }
     else{
       toast.error(result.error)
