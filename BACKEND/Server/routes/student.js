@@ -92,26 +92,28 @@ router.put("/changepassword",(req,res)=>{
 
 // /get all registered courses of a student
 
-router.get("/my-courses",(req,res)=>{
-    const email = req.headers.email;
+router.get("/my-courses", (req, res) => {
+   
+    const email = req.headers['email']; 
 
     const sql = `
-      SELECT c.course_name
+      SELECT c.course_id, c.course_name, c.image
       FROM courses c
       INNER JOIN students s ON s.course_id = c.course_id
       WHERE s.email = ?
     `;
 
-    pool.query(sql,[email],(error,data)=>{
-        if(error){
+    pool.query(sql, [email], (error, data) => {
+        if (error) {
             return res.send(result.createResult(error));
         }
-        else if(data.length===0){
-             return res.send(result.createResult("NO courses are available"));
+        else if (data.length === 0) {
+           
+            return res.send(result.createResult("No courses Registered", []));
         }
-        res.send(result.createResult(null,data));
-    })
-})
+        res.send(result.createResult(null, data));
+    });
+});
 
 ///my-coursewith-videos
 router.get("/my-coursewith-videos", (req, res) => {
