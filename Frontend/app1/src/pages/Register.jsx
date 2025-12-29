@@ -4,62 +4,104 @@ import { toast } from 'react-toastify'
 import { registerUser } from '../services/userServices'
 
 function Register() {
-    const [name, setName]=useState('')
-    const [email, setEmail]= useState('')
-    const [Course_id, setcourse_id]= useState('')
-    const [Mobile,setMobile] = useState('')
-    const navigate = useNavigate()
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [Course_id, setcourse_id] = useState('')
+  const [Mobile, setMobile] = useState('')
+  const navigate = useNavigate()
 
-    const signup = async() =>{
-        if(name=='')
-            toast.warn('name must be entered')
-        else if(email=='')
-            toast.warn('email must be entered')
-        else if(Course_id=='')
-            toast.warn('course id must be entered')
-        else{
-            const result = await registerUser(name,email,Course_id,Mobile)
-            if(result.status=='success'){
-                navigate('/')
-                toast.success('user registered successfully')
-            }
-            else{
-                toast.error(result.error)
-            }
-        }
+  const signup = async () => {
+    if (name === '')
+      toast.warn('name must be entered')
+    else if (email === '')
+      toast.warn('email must be entered')
+    else if (Course_id === '')
+      toast.warn('course id must be entered')
+    else {
+      const result = await registerUser(name, email, Course_id, Mobile)
+      if (result.status === 'success') {
+        navigate('/login')
+        toast.success('user registered successfully')
+      } else {
+        toast.error(result.error)
+      }
     }
+  }
+
   return (
-    <div className='container w-50'>
-            <div class=" mt-3 mb-3">
-                <label for="inputName" className="form-label">Name</label>
-                <input type="text" className="form-control" id="inputName" placeholder="Enter name" onChange={e => setName(e.target.value)}  required />
-            </div>
+    <div
+      className="d-flex justify-content-center align-items-center vh-100"
+      style={{ backgroundColor: '#f0f8ff' }}
+    >
+      <div className="card p-4 shadow-lg" style={{ width: '400px', borderRadius: '15px' }}>
+        <h3 className="text-center mb-4 text-primary">Register</h3>
 
-            <div class="mb-3">
-                <label for="inputEmail" className="form-label">Email</label>
-                <input type="email" className="form-control" id="inputEmail" placeholder="Enter email" onChange={e=> setEmail(e.target.value)}  required />
-            </div>
-
-            <div className="mb-3">
-                <label for="input" className="form-label">Course_id</label>
-                <input type="text" className="form-control" id="inputPassword" placeholder="Enter password" onChange={e => setcourse_id(e.target.value)}required />
-            </div>
-
-            <div className="mb-3">
-                <label for="inputMobile" className="form-label">Mobile</label>
-                <input type="tel" className="form-control" id="inputMobile" placeholder="Enter Mobile number"
-                onChange={e => setMobile(e.target.value)}  required />
-            </div>
-
-
-            <div className="mb-3">
-                <button className="btn btn-success" onClick={signup}>Signup</button>
-            </div>
-
-            <div>
-                Already have an account? then to login <Link to='/login' >Click Here</Link>
-            </div>
+        <div className="mb-3">
+          <label htmlFor="inputName" className="form-label fw-bold">
+            Name
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="inputName"
+            placeholder="Enter name"
+            onChange={e => setName(e.target.value)}
+          />
         </div>
+
+        <div className="mb-3">
+          <label htmlFor="inputEmail" className="form-label fw-bold">
+            Email
+          </label>
+          <input
+            type="email"
+            className="form-control"
+            id="inputEmail"
+            placeholder="Enter email"
+            onChange={e => setEmail(e.target.value)}
+          />
+        </div>
+
+        <div className="mb-3">
+          <label htmlFor="inputCourse" className="form-label fw-bold">
+            Course ID
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="inputCourse"
+            placeholder="Enter course id"
+            onChange={e => setcourse_id(e.target.value)}
+          />
+        </div>
+
+        <div className="mb-3">
+          <label htmlFor="inputMobile" className="form-label fw-bold">
+            Mobile
+          </label>
+          <input
+            type="tel"
+            className="form-control"
+            id="inputMobile"
+            placeholder="Enter mobile number"
+            onChange={e => setMobile(e.target.value)}
+          />
+        </div>
+
+        <div className="d-grid mb-3">
+          <button className="btn btn-primary fw-bold" onClick={signup}>
+            Sign Up
+          </button>
+        </div>
+
+        <p className="text-center">
+          Already have an account?{' '}
+          <Link to="/login" className="text-decoration-none text-primary fw-bold">
+            Sign In
+          </Link>
+        </p>
+      </div>
+    </div>
   )
 }
 

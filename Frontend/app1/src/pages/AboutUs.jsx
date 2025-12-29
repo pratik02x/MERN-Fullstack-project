@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 function AboutUs() {
-  // Accordion toggle karnyathi state
+  
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -23,8 +23,8 @@ function AboutUs() {
               className="img-fluid rounded shadow-sm border"
               style={{ 
                 width: '100%', 
-                maxWidth: '650px', // Width kami keli
-                maxHeight: '350px', // Height control keli
+                maxWidth: '650px', 
+                maxHeight: '350px', 
                 objectFit: 'cover', 
                 border: '5px solid #fff' 
               }}

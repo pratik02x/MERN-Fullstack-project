@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { LoginContext } from "../App";
 import updatePassword from '../pages/UpdatePassword';
-function Navbar() {
+import sunbeamLogo from "../assets/sunbeam_LOGO.jpeg";
 
 function Navbar() {
   const { loginstatus, setloginstatus, username, userrole } = useContext(LoginContext);
@@ -23,7 +23,15 @@ function Navbar() {
       <nav className="navbar navbar-expand-lg" style={{ backgroundColor: '#00bcd4' }}>
         <div className="container-fluid">
           <Link className="navbar-brand text-white fw-bold" to="/home">
-            {loginstatus && userrole === 'admin' ? "Student Portal" : "Sunbeam Institute"}
+
+            <img
+              src={sunbeamLogo}
+              alt="Sunbeam Logo"
+              height="40"
+              style={{ marginRight: "8px" }}
+            />
+
+            {loginstatus && userrole === 'admin' ? "Student Portal" : "SUNBEAM INSTITUTE"}
           </Link>
 
           <div className="collapse navbar-collapse show">
@@ -70,7 +78,7 @@ function Navbar() {
         </div>
       </nav>
 
-    {/* only admin second bar */}
+      {/* only admin second bar */}
       {loginstatus && userrole === 'admin' && (
         <nav className="navbar navbar-expand-lg py-0" style={{ backgroundColor: '#0d6efd' }}>
           <div className="container-fluid justify-content-center">
@@ -78,7 +86,7 @@ function Navbar() {
               <li className="nav-item px-3">
                 <Link className="nav-link text-white fw-bold" to="/dashboard">Dashboard</Link>
               </li>
-              
+
               <li className="nav-item dropdown px-3">
                 <span className="nav-link dropdown-toggle text-white fw-bold" role="button" data-bs-toggle="dropdown">
                   Courses
