@@ -6,16 +6,16 @@ function AboutUs() {
 
   return (
     <div className="container py-5 mt-3">
-      {/* 1. Breadcrumb - (Commented as per your code) */}
+      {/* 1. Breadcrumb */}
       
       <div className="row">
-        {/* --- LEFT SECTION: MAIN CONTENT --- */}
+        {/*LEFT SECTION: MAIN CONTENT*/}
         <div className="col-lg-8 pe-lg-5">
           <h3 className="fw-bold mb-4 text-uppercase" style={{ color: '#444', borderBottom: '1px dotted #ccc', paddingBottom: '10px' }}>
             ABOUT SUNBEAM
           </h3>
 
-          {/* Main Building Image - Size Kami Keli Ahe */}
+          {/* Main Building Image*/}
           <div className="mb-4 text-center">
             <img 
               src="/images/sunbeam.png" 
@@ -93,6 +93,8 @@ function AboutUs() {
               </div>
             )}
           </div>
+
+            
         </div>
 
         {/* --- RIGHT SECTION: SIDEBAR --- */}
@@ -106,11 +108,11 @@ function AboutUs() {
             </ul>
           </div>
 
-          {/* Registration Card - Height Vadhvli Ahe */}
+          {/* Registration Card*/}
           <div className="card text-center text-white border-0 shadow" 
                style={{ 
                  background: 'linear-gradient(to bottom, #4eb8d1, #3a97ae)', 
-                 minHeight: '520px' // Height increase keli
+                 minHeight: '520px'
                }}>
             <div className="card-body d-flex flex-column align-items-center justify-content-center">
                <div className="mb-4">

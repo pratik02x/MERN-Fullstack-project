@@ -28,10 +28,10 @@ function Navbar() {
               src={sunbeamLogo}
               alt="Sunbeam Logo"
               height="40"
-              style={{ marginRight: "8px" }}
+              style={{ marginRight: "8px",borderRadius:"60%" }}
             />
 
-            {loginstatus && userrole === 'admin' ? "Student Portal" : "SUNBEAM INSTITUTE"}
+            {loginstatus && userrole === 'admin' ? "Student Portal" : "SUNBEAM INFOTECH"}
           </Link>
 
           <div className="collapse navbar-collapse show">
@@ -54,7 +54,7 @@ function Navbar() {
             <ul className="navbar-nav ms-auto">
               {!loginstatus ? (
                 <li className="nav-item">
-                  <Link className="nav-link text-white fw-bold" to="/login">Login</Link>
+                  <Link className="nav-link text-white fw-bold" to="/login" style={{backgroundColor:"rgb(0, 43, 73)",borderRadius:'20%'}}>Login</Link>
                 </li>
               ) : (
                 <li className="nav-item dropdown">

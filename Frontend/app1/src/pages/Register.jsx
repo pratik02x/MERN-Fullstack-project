@@ -33,8 +33,8 @@ function Register() {
       className="d-flex justify-content-center align-items-center vh-100"
       style={{ backgroundColor: '#f0f8ff' }}
     >
-      <div className="card p-4 shadow-lg" style={{ width: '400px', borderRadius: '15px' }}>
-        <h3 className="text-center mb-4 text-primary">Register</h3>
+      <div className="card p-4 shadow-lg" style={{ width: '400px', borderRadius: '15px',backgroundColor:'rgb(0, 43, 73)',color:'white' }}>
+        <h2 className="text-center mb-4 text-white">Register</h2>
 
         <div className="mb-3">
           <label htmlFor="inputName" className="form-label fw-bold">
