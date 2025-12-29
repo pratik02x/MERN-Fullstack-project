@@ -35,14 +35,9 @@ router.post("/register-to-course",(req,res)=>{
                         return res.send(result.createResult(error));
                     }
                   res.send(result.createResult(null,data));
-                })
-
-
-                
+                })                
              })
 
-
-            
         }
          else{
              const sql=`INSERT INTO students(name,email, course_id,mobile_no) VALUES(?,?,?,?)`;
@@ -60,9 +55,6 @@ router.post("/register-to-course",(req,res)=>{
 })
 
    
-  
-
-
 //update password
 router.put("/changepassword",(req,res)=>{
     const{newpassword,confirmpassword}=req.body;
@@ -90,8 +82,8 @@ router.put("/changepassword",(req,res)=>{
 
 })
 
-// /get all registered courses of a student
 
+// /get all registered courses of a student
 router.get("/my-courses",(req,res)=>{
     const email = req.headers.email;
 
@@ -106,12 +98,13 @@ router.get("/my-courses",(req,res)=>{
         if(error){
             return res.send(result.createResult(error));
         }
-        else if(data.length===0){
+        else if(data.length==0){
              return res.send(result.createResult("NO courses are available"));
         }
         res.send(result.createResult(null,data));
     })
 })
+
 
 ///my-coursewith-videos
 router.get("/my-coursewith-videos", (req, res) => {
@@ -124,12 +117,11 @@ router.get("/my-coursewith-videos", (req, res) => {
             v.video_id,
             v.title,
             v.youtube_url
-        FROM students s
+        FROM student s
         INNER JOIN courses c ON s.course_id = c.course_id
         INNER JOIN videos v ON c.course_id = v.course_id
         WHERE s.email = ?
     `;
-
     pool.query(sql, [email], (error, data) => {
         if (error) {
             return res.send(result.createResult(error));

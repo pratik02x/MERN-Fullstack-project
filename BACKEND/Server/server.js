@@ -1,4 +1,5 @@
 const express=require("express");
+const cors=require("cors")
 const app=express();
 const {authuser,authorization}=require("./utils/auth");
 const commonApi=require("./routes/common_Api");
@@ -7,8 +8,9 @@ const studentRouter=require("./routes/student");
 
 
 app.use(express.json())
+app.use(cors());
 app.use(authuser);
-//app.use(authorization);
+
 app.use("/common",commonApi);
 app.use("/admin",adminRouter);
 app.use("/student",studentRouter);
