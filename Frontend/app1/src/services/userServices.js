@@ -1,4 +1,3 @@
-import Register from "../pages/Register";
 import config from "./config";
 import axios from "axios"
 
@@ -23,9 +22,36 @@ export async function userUpdatePassword(oldpassword,newpassword,confirmpassword
     return response.data;
 }
 
-export async function registerUser(name,email,Course_id,Mobile){
-    const URL = config.Base_URL + '/user/signup'
-    const body = {name,email,Course_id,Mobile}
+export async function registerUser(name,email,course_id,mobile_no){
+    const URL = config.Base_URL + '/student/register-to-course'
+    const body = {name,email,course_id,mobile_no}
     const response=await axios.post(URL,body)
     return response.data
 }
+
+
+
+
+
+
+
+export async function getMyRegisteredCourses() {
+    const URL = config.Base_URL + '/student/my-courses'
+    
+    
+    const email = sessionStorage.getItem("username")
+    const token = sessionStorage.getItem("token") 
+
+    
+    const response = await axios.get(URL, {
+        headers: { 
+            'email': email,
+            'token': token  
+           
+        }
+    })
+    return response.data
+}
+
+
+

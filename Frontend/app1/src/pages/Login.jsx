@@ -24,10 +24,14 @@ function Login() {
         }
         else{
         if(result.status=="success"){
+            
+            sessionStorage.setItem("token",result.data.token);
+            sessionStorage.setItem("username", result.data.email);
+            console.log(sessionStorage.getItem("username"))
+
             setloginstatus(true);
             setusername(result.data.email)
             setuserrole(result.data.role)
-            sessionStorage.setItem("token",result.data.token);
             navigate("/home");
             toast.success("login successfull");
         }

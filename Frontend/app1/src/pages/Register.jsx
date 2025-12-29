@@ -2,12 +2,16 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router'
 import { toast } from 'react-toastify'
 import { registerUser } from '../services/userServices'
+import { useLocation } from 'react-router'
 
 function Register() {
+    const location = useLocation();
+    const initialCourseId = location.state?.course_id || '';
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
-  const [Course_id, setcourse_id] = useState('')
-  const [Mobile, setMobile] = useState('')
+  const [course_id, setcourse_id] = useState('')
+  
+  const [mobile_no, setmobile_no] = useState('')
   const navigate = useNavigate()
 
   const signup = async () => {
@@ -15,10 +19,10 @@ function Register() {
       toast.warn('name must be entered')
     else if (email === '')
       toast.warn('email must be entered')
-    else if (Course_id === '')
+    else if (course_id === '')
       toast.warn('course id must be entered')
     else {
-      const result = await registerUser(name, email, Course_id, Mobile)
+      const result = await registerUser(name, email, course_id, mobile_no)
       if (result.status === 'success') {
         navigate('/login')
         toast.success('user registered successfully')
@@ -84,7 +88,7 @@ function Register() {
             className="form-control"
             id="inputMobile"
             placeholder="Enter mobile number"
-            onChange={e => setMobile(e.target.value)}
+            onChange={e => setmobile_no(e.target.value)}
           />
         </div>
 

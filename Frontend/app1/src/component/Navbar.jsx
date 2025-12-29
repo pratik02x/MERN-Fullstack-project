@@ -1,8 +1,6 @@
 import React, { useContext } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { LoginContext } from "../App";
-import updatePassword from '../pages/UpdatePassword';
-import sunbeamLogo from "../assets/sunbeam_LOGO.jpeg";
 
 function Navbar() {
   const { loginstatus, setloginstatus, username, userrole } = useContext(LoginContext);
@@ -23,15 +21,7 @@ function Navbar() {
       <nav className="navbar navbar-expand-lg" style={{ backgroundColor: '#00bcd4' }}>
         <div className="container-fluid">
           <Link className="navbar-brand text-white fw-bold" to="/home">
-
-            <img
-              src={sunbeamLogo}
-              alt="Sunbeam Logo"
-              height="40"
-              style={{ marginRight: "8px" }}
-            />
-
-            {loginstatus && userrole === 'admin' ? "Student Portal" : "SUNBEAM INSTITUTE"}
+            {loginstatus && userrole === 'admin' ? "Student Portal" : "Sunbeam Institute"}
           </Link>
 
           <div className="collapse navbar-collapse show">
@@ -78,7 +68,7 @@ function Navbar() {
         </div>
       </nav>
 
-      {/* only admin second bar */}
+    {/* only admin second bar */}
       {loginstatus && userrole === 'admin' && (
         <nav className="navbar navbar-expand-lg py-0" style={{ backgroundColor: '#0d6efd' }}>
           <div className="container-fluid justify-content-center">
@@ -86,14 +76,14 @@ function Navbar() {
               <li className="nav-item px-3">
                 <Link className="nav-link text-white fw-bold" to="/dashboard">Dashboard</Link>
               </li>
-
+              
               <li className="nav-item dropdown px-3">
                 <span className="nav-link dropdown-toggle text-white fw-bold" role="button" data-bs-toggle="dropdown">
                   Courses
                 </span>
                 <ul className="dropdown-menu">
-                  <li><Link className="dropdown-item" to="/addcourse">Add Course</Link></li>
-                  <li><Link className="dropdown-item" to="/managestudents">Manage Students</Link></li>
+                  <li><Link className="dropdown-item" to="/addcourse">Get All Courses</Link></li>
+                  <li><Link className="dropdown-item" to="/managestudents">Add Courses</Link></li>
                 </ul>
               </li>
 
@@ -102,8 +92,8 @@ function Navbar() {
                   Videos
                 </span>
                 <ul className="dropdown-menu">
-                  <li><Link className="dropdown-item" to="/addcourse">Add Course</Link></li>
-                  <li><Link className="dropdown-item" to="/managestudents">Manage Students</Link></li>
+                  <li><Link className="dropdown-item" to="/addcourse">Get All Videos</Link></li>
+                  <li><Link className="dropdown-item" to="/managestudents">Add Videos</Link></li>
                 </ul>
               </li>
 
@@ -112,8 +102,8 @@ function Navbar() {
                   Students
                 </span>
                 <ul className="dropdown-menu">
-                  <li><Link className="dropdown-item" to="/addcourse">Add Course</Link></li>
-                  <li><Link className="dropdown-item" to="/managestudents">Manage Students</Link></li>
+                  <li><Link className="dropdown-item" to="/addcourse">Get All Studens</Link></li>
+                  
                 </ul>
               </li>
             </ul>

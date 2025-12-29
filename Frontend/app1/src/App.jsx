@@ -12,6 +12,8 @@ import { ToastContainer } from "react-toastify"
 import { createContext, useState } from "react"
 import Navbar from "./component/Navbar"
 import Footer from "./component/Footer"
+import CourseDetails from "./pages/Coursedetails"
+import CourseContent from "./pages/CourseContent"
 
 export const LoginContext=createContext();
 function App() {
@@ -36,10 +38,11 @@ function App() {
        
           <Route path="/login" element={<Login/>}/>
           <Route path="/register" element={<Register/>}/>
-        
+          <Route path="/course-details/:id" element={<CourseDetails />} />
           <Route path="/updatepassword" element={<UpdatePassword/>}/>
           <Route path="/student" element={loginstatus ? <Student/> : <Navigate to="/home"/>}/>
           <Route path="/mycourses" element={loginstatus ? <Mycourses/> : <Navigate to="/home"/>}/>
+          <Route path="course-content" element={<CourseContent/>} />
         </Routes>
         <ToastContainer/>
        
