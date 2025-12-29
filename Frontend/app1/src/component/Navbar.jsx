@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { LoginContext } from "../App";
+import updatePassword from '../pages/UpdatePassword';
+function Navbar() {
 
 function Navbar() {
   const { loginstatus, setloginstatus, username, userrole } = useContext(LoginContext);

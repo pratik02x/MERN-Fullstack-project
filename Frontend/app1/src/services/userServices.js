@@ -1,3 +1,4 @@
+import Register from "../pages/Register";
 import config from "./config";
 import axios from "axios"
 
@@ -20,4 +21,11 @@ export async function userUpdatePassword(oldpassword,newpassword,confirmpassword
 }});
 
     return response.data;
+}
+
+export async function registerUser(name,email,Course_id,Mobile){
+    const URL = config.Base_URL + '/user/signup'
+    const body = {name,email,Course_id,Mobile}
+    const response=await axios.post(URL,body)
+    return response.data
 }
