@@ -41,15 +41,12 @@ router.post("/auth/login",(req,res)=>{
                     token
                 }
 
-                res.send(result.createResult(error,userdata))
-                
-                
-        }
-            
-        
+                res.send(result.createResult(error,userdata))        
+        } 
        
     })
 })
+
 
 router.get("/course/all-active-course",(req,res)=>{
     const sql="SELECT * FROM courses WHERE CURRENT_DATE <= end_date";
