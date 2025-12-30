@@ -29,7 +29,7 @@ function authuser(req,res,next){
 
 function authorization(req,res,next){
     const role=req.headers.role;
-    if(role=="admin"){
+    if(role==="admin"){
         return next();
     }
     else{
