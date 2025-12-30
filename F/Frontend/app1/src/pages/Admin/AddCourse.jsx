@@ -13,7 +13,7 @@ function AddCourse() {
     video_expire_days: ''
   });
   
-  const [imageFile, setImageFile] = useState(null); // Desktop image साठी
+  const [imageFile, setImageFile] = useState(null);
   const navigate = useNavigate();
 
   const handleInput = (e) => {
@@ -22,13 +22,13 @@ function AddCourse() {
   };
 
   const handleFileChange = (e) => {
-    setImageFile(e.target.files[0]); // निवलेली पहिली फाईल
+    setImageFile(e.target.files[0]);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // FormData तयार करा
+   
     const formData = new FormData();
     formData.append('course_name', course.course_name);
     formData.append('description', course.description);
@@ -38,7 +38,6 @@ function AddCourse() {
     formData.append('video_expire_days', Number(course.video_expire_days));
     
     if (imageFile) {
-        // 'course_image' हे नाव तुमच्या Backend मधील upload.single('course_image') शी मॅच हवे
         formData.append('course_image', imageFile); 
     }
 

@@ -6,7 +6,7 @@ const commonApi=require("./routes/common_Api");
 const adminRouter=require("./routes/admin_api");
 const studentRouter=require("./routes/student");
 
-
+//main code
 app.use(express.json())
 app.use(cors());
 app.use(authuser);
