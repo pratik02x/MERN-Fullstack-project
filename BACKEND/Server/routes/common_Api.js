@@ -40,10 +40,9 @@ router.post("/auth/login",(req,res)=>{
                     email:user.email,
                     token
                 }
-
                 res.send(result.createResult(error,userdata))        
-        } 
-       
+        
+            }     
     })
 })
 

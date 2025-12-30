@@ -1,5 +1,5 @@
 import React ,{ useState } from 'react'
-import { Link, useNavigate } from 'react-router'
+import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { loginUser } from '../services/userServices';
 import { LoginContext } from '../App';
@@ -24,14 +24,10 @@ function Login() {
         }
         else{
         if(result.status=="success"){
-            
-            sessionStorage.setItem("token",result.data.token);
-            sessionStorage.setItem("username", result.data.email);
-            console.log(sessionStorage.getItem("username"))
-
             setloginstatus(true);
             setusername(result.data.email)
             setuserrole(result.data.role)
+            sessionStorage.setItem("token",result.data.token);
             navigate("/home");
             toast.success("login successfull");
         }
@@ -47,8 +43,8 @@ function Login() {
       className="d-flex justify-content-center align-items-center vh-100"
      style={{ backgroundColor: '#f0f8ff' }}
     >
-      <div className="card p-4 shadow-lg" style={{ width: '400px', borderRadius: '15px' }}>
-        <h3 className="text-center mb-4 text-primary">Sign In</h3>
+      <div className="card p-4 shadow-lg" style={{ width: '400px', borderRadius: '15px',backgroundColor:'rgb(0, 43, 73)',color:'white' }}>
+        <h2 className="text-center mb-4 text-white">Sign In</h2>
 
         <div className="mb-3">
           <label htmlFor="inputEmail" className="form-label fw-bold">
@@ -92,5 +88,6 @@ function Login() {
     </div>
   )
 }
+
 
 export default Login

@@ -10,7 +10,7 @@ export default function CourseDetails() {
   if (!course) {
     return (
       <div className="container mt-5 text-center">
-        <h3>Course mahiti milali nahi!</h3>
+        <h3>Course information is not availabe</h3>
         <button className="btn btn-primary" onClick={() => navigate('/home')}>Go Back</button>
       </div>
     );
