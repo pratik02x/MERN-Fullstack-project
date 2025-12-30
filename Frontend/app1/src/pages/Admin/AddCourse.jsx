@@ -13,7 +13,9 @@ function AddCourse() {
     video_expire_days: ''
   });
   
-  const [imageFile, setImageFile] = useState(null); // Desktop image साठी
+  const [imageFile, setImageFile] = useState(null);
+  const [preview, setPreview] = useState(null); // Added for UX
+  const [isSubmitting, setIsSubmitting] = useState(false); // Prevent double submission
   const navigate = useNavigate();
 
   const handleInput = (e) => {
@@ -22,33 +24,44 @@ function AddCourse() {
   };
 
   const handleFileChange = (e) => {
-    setImageFile(e.target.files[0]); // निवलेली पहिली फाईल
+    const file = e.target.files[0];
+    if (file) {
+      setImageFile(file);
+      setPreview(URL.createObjectURL(file)); // Create a temporary URL for preview
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // FormData तयार करा
-    const formData = new FormData();
-    formData.append('course_name', course.course_name);
-    formData.append('description', course.description);
-    formData.append('fees', Number(course.fees));
-    formData.append('start_date', course.start_date);
-    formData.append('end_date', course.end_date);
-    formData.append('video_expire_days', Number(course.video_expire_days));
-    
-    if (imageFile) {
-        // 'course_image' हे नाव तुमच्या Backend मधील upload.single('course_image') शी मॅच हवे
-        formData.append('course_image', imageFile); 
+
+    // Basic Date Validation
+    if (new Date(course.end_date) < new Date(course.start_date)) {
+      toast.error("End date cannot be before start date");
+      return;
     }
 
-    const res = await addCourse(formData);
+    setIsSubmitting(true);
+    const formData = new FormData();
+    Object.keys(course).forEach(key => {
+      formData.append(key, key === 'fees' || key === 'video_expire_days' ? Number(course[key]) : course[key]);
+    });
     
-    if (res.status === 'success') {
-      toast.success("Course added successfully!");
-      navigate('/get-all-courses');
-    } else {
-      toast.error(res.error || "Error adding course");
+    if (imageFile) {
+      formData.append('course_image', imageFile); 
+    }
+
+    try {
+      const res = await addCourse(formData);
+      if (res.status === 'success') {
+        toast.success("Course added successfully!");
+        navigate('/get-all-courses');
+      } else {
+        toast.error(res.error || "Error adding course");
+      }
+    } catch (error) {
+      toast.error("Server communication error");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -63,46 +76,60 @@ function AddCourse() {
             <div className="card-body p-4">
               <form onSubmit={handleSubmit}>
                 <div className="mb-3">
-                  <label className="form-label fw-bold">Course Name</label>
-                  <input type="text" name="course_name" className="form-control" onChange={handleInput} required />
+                  <label className="form-label fw-bold small text-uppercase">Course Name</label>
+                  <input type="text" name="course_name" className="form-control" onChange={handleInput} required placeholder="Enter course title" />
                 </div>
                 
                 <div className="mb-3">
-                  <label className="form-label fw-bold">Description</label>
-                  <textarea name="description" className="form-control" onChange={handleInput} rows="2" required></textarea>
+                  <label className="form-label fw-bold small text-uppercase">Description</label>
+                  <textarea name="description" className="form-control" onChange={handleInput} rows="2" required placeholder="Briefly describe the course"></textarea>
                 </div>
 
-                {/* File Upload Section */}
                 <div className="mb-3">
-                  <label className="form-label fw-bold">Course Image (Desktop)</label>
-                  <input type="file" className="form-control" accept="image/*" onChange={handleFileChange} required />
+                  <label className="form-label fw-bold small text-uppercase">Course Image</label>
+                  <input type="file" className="form-control mb-2" accept="image/*" onChange={handleFileChange} required />
+                  {preview && (
+                    <div className="text-center border rounded p-2">
+                      <img src={preview} alt="Preview" style={{ maxHeight: '150px', maxWidth: '100%' }} />
+                    </div>
+                  )}
                 </div>
 
                 <div className="row">
                   <div className="col-md-6 mb-3">
-                    <label className="form-label fw-bold">Fees (₹)</label>
-                    <input type="number" name="fees" className="form-control" onChange={handleInput} required />
+                    <label className="form-label fw-bold small text-uppercase">Fees (₹)</label>
+                    <input type="number" name="fees" className="form-control" onChange={handleInput} required min="0" />
                   </div>
                   <div className="col-md-6 mb-3">
-                    <label className="form-label fw-bold">Video Expire (Days)</label>
-                    <input type="number" name="video_expire_days" className="form-control" onChange={handleInput} required />
+                    <label className="form-label fw-bold small text-uppercase">Video Expire (Days)</label>
+                    <input type="number" name="video_expire_days" className="form-control" onChange={handleInput} required min="1" />
                   </div>
                 </div>
 
                 <div className="row">
                   <div className="col-md-6 mb-3">
-                    <label className="form-label fw-bold">Start Date</label>
+                    <label className="form-label fw-bold small text-uppercase">Start Date</label>
                     <input type="date" name="start_date" className="form-control" onChange={handleInput} required />
                   </div>
                   <div className="col-md-6 mb-3">
-                    <label className="form-label fw-bold">End Date</label>
+                    <label className="form-label fw-bold small text-uppercase">End Date</label>
                     <input type="date" name="end_date" className="form-control" onChange={handleInput} required />
                   </div>
                 </div>
 
                 <div className="mt-4 d-grid gap-2">
-                  <button type="submit" className="btn btn-primary py-2 fw-bold rounded-pill shadow-sm">Register Course</button>
-                  <button type="button" className="btn btn-light py-2 fw-bold rounded-pill" onClick={() => navigate(-1)}>Back</button>
+                  <button 
+                    type="submit" 
+                    className="btn btn-primary py-2 fw-bold rounded-pill shadow-sm"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? (
+                      <span className="spinner-border spinner-border-sm me-2"></span>
+                    ) : 'Register Course'}
+                  </button>
+                  <button type="button" className="btn btn-outline-secondary py-2 fw-bold rounded-pill" onClick={() => navigate(-1)}>
+                    Cancel
+                  </button>
                 </div>
               </form>
             </div>
