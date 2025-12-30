@@ -1,3 +1,4 @@
+//authorization
 const jwt=require("jsonwebtoken");
 const result=require("../utils/result");
 const config=require("../utils/config");

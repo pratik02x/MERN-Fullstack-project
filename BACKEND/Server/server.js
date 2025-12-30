@@ -1,15 +1,22 @@
 const express=require("express");
+const cors = require("cors");
+const path = require('path');
+
 const app=express();
+
 const {authuser,authorization}=require("./utils/auth");
-const commonApi=require("./routes/common_Api");
-const adminRouter=require("./routes/admin_api");
+const commenApi=require("./routes/common_Api");
+const adminRouter=require("./routes/Admin");
 const studentRouter=require("./routes/student");
 
-
+//main code
+app.use(cors())
+app.use(express.static(path.join(__dirname, 'uploads')));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
 app.use(authuser);
 //app.use(authorization);
-app.use("/common",commonApi);
+app.use("/common",commenApi);
 app.use("/admin",adminRouter);
 app.use("/student",studentRouter);
 

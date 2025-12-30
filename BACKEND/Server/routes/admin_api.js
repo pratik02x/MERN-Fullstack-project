@@ -1,3 +1,4 @@
+//admin
 const express = require("express")
 const router = express.Router();
 
@@ -126,7 +127,6 @@ router.delete("/video/delete/:video_id",authorization,(req,res)=>{
 })
 
 //get all students enrolled to course by course id
-
 router.get("/enrolled/students",authorization,(req,res)=>{
     const{course_id}=req.query;
     const sql=`SELECT * FROM students WHERE course_id=?`;
@@ -134,8 +134,6 @@ router.get("/enrolled/students",authorization,(req,res)=>{
         res.send(result.createResult(null,data));
     })
 })
-
-
 
 
 module.exports=router;

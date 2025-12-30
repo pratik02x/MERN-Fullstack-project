@@ -1,3 +1,4 @@
+//common
 const express=require("express");
 const cryptojs=require("crypto-js")
 const jwt=require("jsonwebtoken")
@@ -9,46 +10,47 @@ const { error } = require("node:console");
 
 
 const router=express.Router();
-router.post("/auth/login", (req, res) => {
-    const { email, password } = req.body;
 
-    const hashedpassword = cryptojs.SHA256(password).toString();
-    const sql = "SELECT * FROM users WHERE email=? AND password=?";
+router.post("/auth/login",(req,res)=>{
+    const {email,password}=req.body;
+  
+    const hashedpassword=cryptojs.SHA256(password).toString();
+    const sql="SELECT * FROM users WHERE email=? AND password=?";
+    pool.query(sql,[email,hashedpassword],(error,data)=>{
 
-    pool.query(sql, [email, hashedpassword], (error, data) => {
-        if (error) {
-            // Error during database query
-            return res.send(result.createResult(error));
+        if(error){
+             res.send(result.createResult(error));
         }
+        else if(data.length==0){
+             res.send(result.createResult("Invalid email or password"));
+        }
+        else{
+                const user=data[0];
+            
+                const payload={
+                    email:user.email,
+                    password:user.password,
+                    role:user.role
+                }
+
+                const token=jwt.sign(payload,config.SECRET);
+
+                const userdata={
+                    
+                    role:user.role,
+                    email:user.email,
+                    token
+                }
+
+                res.send(result.createResult(error,userdata))
+                
+                
+        }
+            
         
-        if (data.length == 0) {
-            // No user found with those credentials
-            return res.send(result.createResult("Invalid email or password"));
-        }
-
-        // Login Successful
-        const user = data[0];
-
-        // 1. Create payload (Remove password for security!)
-        const payload = {
-            email: user.email,
-            role: user.role
-        };
-
-        // 2. Generate Token
-        const token = jwt.sign(payload, config.SECRET);
-
-        // 3. Prepare response data
-        const userdata = {
-            role: user.role,
-            email: user.email,
-            token: token
-        };
-
-        // 4. Send response - Pass null for the error parameter
-        res.send(result.createResult(null, userdata)); 
-    });
-});
+       
+    })
+})
 
 router.get("/course/all-active-course",(req,res)=>{
     const sql="SELECT * FROM courses WHERE CURRENT_DATE <= end_date";
