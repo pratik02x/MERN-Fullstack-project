@@ -16,7 +16,8 @@ import CourseDetails from "./pages/Coursedetails"
 import CourseContent from "./pages/CourseContent"
 import GetAllCourses from "./pages/Admin/GetAllCourses"
 import AddCourse from "./pages/Admin/AddCourse"
-import GetAllVideos from "./pages/GetAllVideos"
+import GetAllVideos from "./pages/GetAllVideos";
+import AddVideos from "./pages/AddVideos";
 
 export const LoginContext=createContext();
 function App() {
@@ -35,20 +36,22 @@ function App() {
       
         {!hideNavbar && <Navbar />}
         <Routes>
-          <Route path="/" element={<Home/>}/>
-          <Route path='/home' element={<Home/>}/>
-          <Route path="/aboutus" element={<AboutUs/>}/>
-       
-          <Route path="/login" element={<Login/>}/>
-          <Route path="/register" element={<Register/>}/>
-          <Route path="/course-details/:id" element={<CourseDetails />} />
-          <Route path="/updatepassword" element={<UpdatePassword/>}/>
-          <Route path="/student" element={loginstatus ? <Student/> : <Navigate to="/home"/>}/>
-          <Route path="/mycourses" element={loginstatus ? <Mycourses/> : <Navigate to="/home"/>}/>
-          <Route path="course-content" element={<CourseContent/>} />
-          <Route path="/getcourses" element={<GetAllCourses/>}/>
-          <Route path="/addcourse" element={<AddCourse/>}/>
-          <Route path="/getallvideos" element={<GetAllVideos/>}/>
+            <Route path="/" element={<Home/>}/>
+            <Route path='/home' element={<Home/>}/>
+            <Route path="/aboutus" element={<AboutUs/>}/>
+        
+            <Route path="/login" element={<Login/>}/>
+            <Route path="/register" element={<Register/>}/>
+            <Route path="/course-details/:id" element={<CourseDetails />} />
+            <Route path="/updatepassword" element={<UpdatePassword/>}/>
+            <Route path="/student" element={loginstatus ? <Student/> : <Navigate to="/home"/>}/>
+            <Route path="/mycourses" element={loginstatus ? <Mycourses/> : <Navigate to="/home"/>}/>
+            <Route path="course-content" element={<CourseContent/>} />
+            <Route path="/getcourses" element={<GetAllCourses/>}/>
+            <Route path="/addcourse" element={<AddCourse/>}/>
+            <Route path="/getallvideos" element={<GetAllVideos />} />
+            <Route path="/addvideos" element={<AddVideos />} />
+
         </Routes>
         <ToastContainer/>
        
