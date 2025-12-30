@@ -17,6 +17,10 @@ function Navbar() {
     navigate("/updatepassword");
   };
 
+  const getcourses=()=>{
+    navigate("/getcourses");
+  }
+
   return (
     <>
 

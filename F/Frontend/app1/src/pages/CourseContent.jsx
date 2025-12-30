@@ -15,7 +15,7 @@ function CourseContent() {
     const res = await getCourseVideos()
     console.log(res.data)
     if (res.status === 'success' && res.data) {
-      // Fakt tyach course che videos filter kara jo select kela aahe
+      // console.log("success")
       const filteredVideos = res.data.filter(v => v.course_id === course.course_id);
       setVideos(filteredVideos);
     }
