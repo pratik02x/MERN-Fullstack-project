@@ -10,7 +10,7 @@ function GetAllCourses() {
   useEffect(() => {
     fetchData();
   }, []);
-
+   // to featch the data
   const fetchData = async () => {
     
     const res = await getcourses();
