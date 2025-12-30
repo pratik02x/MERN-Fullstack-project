@@ -165,4 +165,19 @@ router.get("/enrolled/students",authorization,(req,res)=>{
         res.send(result.createResult(null,data));
     })
 })
+
+// routes/Admin.js
+// Add this to your Admin.js routes
+router.get("/all-students-list", authorization, (req, res) => {
+    // LEFT JOIN ensures students without a course still appear as 'N/A'
+    const sql = `
+        SELECT s.reg_no, s.name, s.email, s.mobile_no, c.course_name as course 
+        FROM student s 
+        LEFT JOIN courses c ON s.course_id = c.course_id`;
+    
+    pool.query(sql, (error, data) => {
+        if (error) return res.send({ status: 'error', error: error.message });
+        res.send({ status: 'success', data: data });
+    });
+});
 module.exports=router;
