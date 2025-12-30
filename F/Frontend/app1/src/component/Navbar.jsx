@@ -97,7 +97,7 @@ function Navbar() {
                 </span>
                 <ul className="dropdown-menu">
                   <li><Link className="dropdown-item" to="/addcourse">Add Course</Link></li>
-                  <li><Link className="dropdown-item" to="/getallcoursess">Get All Courses</Link></li>
+                  <li><Link className="dropdown-item" to="/getcourses">Get All Courses</Link></li>
                   <li> <Link className='dropdown-item' to="/updatecourses">Update Courses</Link></li>
                 </ul>
               </li>
@@ -107,8 +107,8 @@ function Navbar() {
                   Videos
                 </span>
                 <ul className="dropdown-menu">
-                  <li><Link className="dropdown-item" to="/addvideos">Add Videos</Link></li>
-                  <li><Link className="dropdown-item" to="/getallvideos">Get All Videos</Link></li>
+                  <Link className="dropdown-item" to="/addvideos">Add Videos</Link>
+                  <Link className="dropdown-item" to="/getallvideos">Get All Videos</Link>
                 </ul>
               </li>
 

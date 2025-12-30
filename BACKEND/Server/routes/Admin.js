@@ -31,11 +31,6 @@ router.get("/course/all-courses",(req,res)=>{
 
 
 
-
-
-
-
-// १. Storage Setup
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'uploads/'); 
@@ -67,7 +62,7 @@ router.post("/add", authorization, upload.single('course_image'), (req, res) => 
     const sql = `INSERT INTO courses (course_name, description, fees, start_date, end_date, video_expire_days, course_image) 
                  VALUES (?, ?, ?, ?, ?, ?, ?)`;
 
-    pool.query(sql, [course_name, description, fees, start_date, end_date, video_expire_days, image_name], (error, data) => {
+    pool.query(sql, [course_name, description, fees, start_date, end_date, video_expire_days, course_name], (error, data) => {
         if (error) return res.send({ status: 'error', error: error.message });
         res.send({ status: 'success', data: data });
     });

@@ -1,7 +1,8 @@
-const express=require("express");
-const result=require("../utils/result")
-const pool=require("../db/pool")
-const crypto=require("crypto-js")
+//student
+const express = require("express");
+const result = require("../utils/result");
+const pool = require("../db/pool");
+const crypto = require("crypto-js");
 
 
 const router=express.Router();
