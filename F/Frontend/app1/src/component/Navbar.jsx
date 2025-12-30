@@ -15,6 +15,10 @@ function Navbar() {
     navigate("/updatepassword");
   };
 
+  const getcourses=()=>{
+    navigate("/getcourses");
+  }
+
   return (
     <>
 
@@ -82,8 +86,9 @@ function Navbar() {
                   Courses
                 </span>
                 <ul className="dropdown-menu">
-                  <li><Link className="dropdown-item" to="/addcourse">Get All Courses</Link></li>
-                  <li><Link className="dropdown-item" to="/managestudents">Add Courses</Link></li>
+                  <li>
+                  <button className="dropdown-item" onClick={getcourses}>Get All Courses</button></li>
+                  <li><Link className="dropdown-item" to="/addcourse">Add Courses</Link></li>
                 </ul>
               </li>
 
