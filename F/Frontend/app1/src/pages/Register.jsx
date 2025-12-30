@@ -2,16 +2,12 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router'
 import { toast } from 'react-toastify'
 import { registerUser } from '../services/userServices'
-import { useLocation } from 'react-router'
 
 function Register() {
-    const location = useLocation();
-    const initialCourseId = location.state?.course_id || '';
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
-  const [course_id, setcourse_id] = useState('')
-  
-  const [mobile_no, setmobile_no] = useState('')
+  const [Course_id, setcourse_id] = useState('')
+  const [Mobile, setMobile] = useState('')
   const navigate = useNavigate()
 
   const signup = async () => {
@@ -19,10 +15,10 @@ function Register() {
       toast.warn('name must be entered')
     else if (email === '')
       toast.warn('email must be entered')
-    else if (course_id === '')
+    else if (Course_id === '')
       toast.warn('course id must be entered')
     else {
-      const result = await registerUser(name, email, course_id, mobile_no)
+      const result = await registerUser(name, email, Course_id, Mobile)
       if (result.status === 'success') {
         navigate('/login')
         toast.success('user registered successfully')
@@ -37,8 +33,8 @@ function Register() {
       className="d-flex justify-content-center align-items-center vh-100"
       style={{ backgroundColor: '#f0f8ff' }}
     >
-      <div className="card p-4 shadow-lg" style={{ width: '400px', borderRadius: '15px' }}>
-        <h3 className="text-center mb-4 text-primary">Register</h3>
+      <div className="card p-4 shadow-lg" style={{ width: '400px', borderRadius: '15px',backgroundColor:'rgb(0, 43, 73)',color:'white' }}>
+        <h2 className="text-center mb-4 text-white">Register</h2>
 
         <div className="mb-3">
           <label htmlFor="inputName" className="form-label fw-bold">
@@ -88,7 +84,7 @@ function Register() {
             className="form-control"
             id="inputMobile"
             placeholder="Enter mobile number"
-            onChange={e => setmobile_no(e.target.value)}
+            onChange={e => setMobile(e.target.value)}
           />
         </div>
 

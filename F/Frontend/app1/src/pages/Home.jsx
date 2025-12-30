@@ -32,22 +32,22 @@ function Home() {
                   borderRadius: "12px",
                   overflow: "hidden",
                   textAlign: "center",
-                  backgroundColor: "#fff",
+                  backgroundColor: "rgb(0, 43, 73)",
                   border: "1px solid #eee",
-                  /* CARD WIDTH KAMI KELI AAHE */
+                  
                   maxWidth: "320px", 
-                  margin: "0 auto" // Card row madhe center la disnyathi
+                  margin: "0 auto" 
                 }}
               >
                 {/* IMAGE CONTAINER - Perfect Fit */}
                 <div
                   style={{
-                    height: "180px", // Height thodi kami keli width sobat match vhayla
+                    height: "180px", 
                     width: "100%",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    backgroundColor: "#fff",
+                    backgroundColor: "rgb(0, 43, 73)",
                     padding: "15px"
                   }}
                 >
@@ -64,10 +64,10 @@ function Home() {
 
                 {/* BODY */}
                 <div className="card-body d-flex flex-column p-4">
-                  <h6 className="fw-bold text-capitalize mb-2" style={{ fontSize: '1.1rem' }}>
+                  <h6 className="fw-bold text-capitalize mb-2" style={{ fontSize: '1.1rem',color:'white' }}>
                     {e.course_name}
                   </h6>
-                  <p className="text-muted small mb-3">
+                  <p className="text-white small mb-3" >
                     Starts on: {new Date(e.start_date).toDateString()}
                   </p>
                   

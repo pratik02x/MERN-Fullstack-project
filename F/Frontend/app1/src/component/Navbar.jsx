@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { LoginContext } from "../App";
+import updatePassword from '../pages/UpdatePassword';
+import sunbeamLogo from "../assets/sunbeam_LOGO.jpeg";
 
 function Navbar() {
   const { loginstatus, setloginstatus, username, userrole } = useContext(LoginContext);
@@ -21,7 +23,15 @@ function Navbar() {
       <nav className="navbar navbar-expand-lg" style={{ backgroundColor: '#00bcd4' }}>
         <div className="container-fluid">
           <Link className="navbar-brand text-white fw-bold" to="/home">
-            {loginstatus && userrole === 'admin' ? "Student Portal" : "Sunbeam Institute"}
+
+            <img
+              src={sunbeamLogo}
+              alt="Sunbeam Logo"
+              height="40"
+              style={{ marginRight: "8px",borderRadius:"60%" }}
+            />
+
+            {loginstatus && userrole === 'admin' ? "STUDENT PORTAL" : "SUNBEAM INFOTECH"}
           </Link>
 
           <div className="collapse navbar-collapse show">
@@ -44,7 +54,7 @@ function Navbar() {
             <ul className="navbar-nav ms-auto">
               {!loginstatus ? (
                 <li className="nav-item">
-                  <Link className="nav-link text-white fw-bold" to="/login">Login</Link>
+                  <Link className="nav-link text-white fw-bold" to="/login" style={{backgroundColor:"rgb(0, 43, 73)",borderRadius:'20%'}}>Login</Link>
                 </li>
               ) : (
                 <li className="nav-item dropdown">
@@ -59,7 +69,7 @@ function Navbar() {
                   <ul className="dropdown-menu dropdown-menu-end">
                     <li><button className="dropdown-item" onClick={changepassword}>Update Password</button></li>
                     <li><hr className="dropdown-divider" /></li>
-                    <li><button className="dropdown-item" onClick={logout}>Sign Out</button></li>
+                    <li><button className="dropdown-item"style={{color:'red'}} onClick={logout}>Sign Out</button></li>
                   </ul>
                 </li>
               )}
@@ -68,7 +78,7 @@ function Navbar() {
         </div>
       </nav>
 
-    {/* only admin second bar */}
+      {/* only admin second bar */}
       {loginstatus && userrole === 'admin' && (
         <nav className="navbar navbar-expand-lg py-0" style={{ backgroundColor: '#0d6efd' }}>
           <div className="container-fluid justify-content-center">
@@ -76,14 +86,15 @@ function Navbar() {
               <li className="nav-item px-3">
                 <Link className="nav-link text-white fw-bold" to="/dashboard">Dashboard</Link>
               </li>
-              
+
               <li className="nav-item dropdown px-3">
                 <span className="nav-link dropdown-toggle text-white fw-bold" role="button" data-bs-toggle="dropdown">
                   Courses
                 </span>
                 <ul className="dropdown-menu">
-                  <li><Link className="dropdown-item" to="/addcourse">Get All Courses</Link></li>
-                  <li><Link className="dropdown-item" to="/managestudents">Add Courses</Link></li>
+                  <li><Link className="dropdown-item" to="/addcourse">Add Course</Link></li>
+                  <li><Link className="dropdown-item" to="/getallcoursess">Get All Courses</Link></li>
+                  <li> <Link className='dropdown-item' to="/updatecourses">Update Courses</Link></li>
                 </ul>
               </li>
 
@@ -92,8 +103,8 @@ function Navbar() {
                   Videos
                 </span>
                 <ul className="dropdown-menu">
-                  <li><Link className="dropdown-item" to="/addcourse">Get All Videos</Link></li>
-                  <li><Link className="dropdown-item" to="/managestudents">Add Videos</Link></li>
+                  <li><Link className="dropdown-item" to="/addvideos">Add Videos</Link></li>
+                  <li><Link className="dropdown-item" to="/getallvideos">Get All Videos</Link></li>
                 </ul>
               </li>
 
@@ -102,8 +113,7 @@ function Navbar() {
                   Students
                 </span>
                 <ul className="dropdown-menu">
-                  <li><Link className="dropdown-item" to="/addcourse">Get All Studens</Link></li>
-                  
+                  <li><Link className="dropdown-item" to="/getallstudents">Get All Students</Link></li>
                 </ul>
               </li>
             </ul>
@@ -113,5 +123,6 @@ function Navbar() {
     </>
   );
 }
+
 
 export default Navbar;
