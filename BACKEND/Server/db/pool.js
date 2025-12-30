@@ -2,8 +2,8 @@ const mysql2=require("mysql2");
 const pool=mysql2.createPool({
     host:"localhost",
     user:"root",
-    password:"pratik",
-    database:"project_db"
+    password:"969696",
+    database:"sunbeam_db"
 })
 
 module.exports=pool;
