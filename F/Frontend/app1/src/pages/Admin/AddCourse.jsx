@@ -13,30 +13,19 @@ function AddCourse() {
     video_expire_days: ''
   });
   
-<<<<<<< HEAD
   const [imageFile, setImageFile] = useState(null);
-=======
-  const [imageFile, setImageFile] = useState(null); 
->>>>>>> 1bec19b8195c37eb6241b5a5b78420cf29fedf7d
   const navigate = useNavigate();
 
   
 
   const handleFileChange = (e) => {
-<<<<<<< HEAD
     setImageFile(e.target.files[0]);
-=======
-    setImageFile(e.target.files[0]); 
->>>>>>> 1bec19b8195c37eb6241b5a5b78420cf29fedf7d
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-<<<<<<< HEAD
    
-=======
->>>>>>> 1bec19b8195c37eb6241b5a5b78420cf29fedf7d
     const formData = new FormData();
     formData.append('course_name', course.course_name);
     formData.append('description', course.description);

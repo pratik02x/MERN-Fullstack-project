@@ -1,15 +1,8 @@
-<<<<<<< HEAD
 //student
 const express = require("express");
 const result = require("../utils/result");
 const pool = require("../db/pool");
 const crypto = require("crypto-js");
-=======
-const express=require("express");
-const result=require("../utils/result")
-const pool=require("../db/pool")
-const crypto=require("crypto-js")
->>>>>>> 1bec19b8195c37eb6241b5a5b78420cf29fedf7d
 
 
 const router=express.Router();
