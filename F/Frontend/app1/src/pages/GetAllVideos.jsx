@@ -9,39 +9,86 @@ function GetAllVideos() {
 
   //Fetch all videos
   const fetchVideos = async () => {
-    const res = await axios.get("http://localhost:4000/videos");
-    setVideos(res.data.data);
+    try {
+      const res = await axios.get("http://localhost:4000/videos");
+      setVideos(res.data.data || []);
+    } catch (err) {
+      console.error("Error fetching videos", err);
+    }
   };
 
+  // Fetch all courses
+  const fetchCourses = async () => {
+    try {
+      const res = await axios.get("http://localhost:4000/courses");
+      setCourses(res.data.data || []);
+    } catch (err) {
+      console.error("Error fetching courses", err);
+    }
+  };
 
-  //Filter logic
+  // Load data on page load
+  useEffect(() => {
+    fetchVideos();
+    fetchCourses();
+  }, []);
+
+  // Delete video
+  const deleteVideo = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this video?")) return;
+
+    try {
+      await axios.delete(`http://localhost:4000/videos/${id}`);
+      fetchVideos(); // refresh table
+    } catch (err) {
+      console.error("Delete failed", err);
+    }
+  };
+
+  // Update video
+  const updateVideo = async () => {
+    try {
+      await axios.put(
+        `http://localhost:4000/videos/${editVideo.video_id}`,
+        editVideo
+      );
+      setEditVideo(null);
+      fetchVideos();
+    } catch (err) {
+      console.error("Update failed", err);
+    }
+  };
+
+  // Filter logic
   const filteredVideos =
     selectedCourse === "all"
       ? videos
-      : videos.filter(v => v.course_name === selectedCourse);
+      : videos.filter((v) => v.course_name === selectedCourse);
 
   return (
     <div className="container-fluid px-4 py-4">
       <h2 className="text-center mb-4">All Videos</h2>
 
-      {/*Filter */}
-      <div className="col-md-4 mb-3">
-        <label className="fw-semibold">Filter by Course</label>
-        <select
-          className="form-select"
-          value={selectedCourse}
-          onChange={(e) => setSelectedCourse(e.target.value)}
-        >
-          <option value="all">All Courses</option>
-          {courses.map((c) => (
-            <option key={c.course_id} value={c.course_name}>
-              {c.course_name}
-            </option>
-          ))}
-        </select>
-      </div>
+      {/*Filter*/}
+        <div className="col-md-4 mb-3">
+          <label className="fw-semibold">Search by Course</label>
+          <select
+            className="form-select"
+            value={selectedCourse}
+            onChange={(e) => setSelectedCourse(e.target.value)}
+          >
+            <option value="all">All Courses</option>
 
-      {/* Table */}
+            {courses.map((course) => (
+              <option key={course.course_id} value={course.course_name}>
+                {course.course_name}
+              </option>
+            ))}
+          </select>
+        </div>
+
+
+      {/*Table */}
       <div className="table-responsive shadow-sm">
         <table className="table table-bordered align-middle">
           <thead className="table-dark text-center">
