@@ -19,7 +19,7 @@ function AboutUs() {
           >
             ABOUT SUNBEAM
           </h3>
-
+           
           {/* Main Image */}
           <div className="mb-4 text-center">
             <img
