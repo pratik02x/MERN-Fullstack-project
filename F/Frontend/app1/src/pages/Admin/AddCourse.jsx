@@ -16,10 +16,7 @@ function AddCourse() {
   const [imageFile, setImageFile] = useState(null); 
   const navigate = useNavigate();
 
-  const handleInput = (e) => {
-    const { name, value } = e.target;
-    setCourse({ ...course, [name]: value });
-  };
+  
 
   const handleFileChange = (e) => {
     setImageFile(e.target.files[0]); 
