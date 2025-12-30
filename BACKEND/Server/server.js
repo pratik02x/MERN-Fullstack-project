@@ -9,12 +9,13 @@ const commenApi=require("./routes/common_Api");
 const adminRouter=require("./routes/Admin");
 const studentRouter=require("./routes/student");
 
+//main code
 app.use(cors())
 app.use(express.static(path.join(__dirname, 'uploads')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
 app.use(authuser);
-// app.use(authorization);
+//app.use(authorization);
 app.use("/common",commenApi);
 app.use("/admin",adminRouter);
 app.use("/student",studentRouter);
