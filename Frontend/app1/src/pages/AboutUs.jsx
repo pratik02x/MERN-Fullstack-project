@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router';
 
 function AboutUs() {
   // Accordion toggle karnyathi state
   const [isOpen, setIsOpen] = useState(false);
+  const navigate=useNavigate();
+  const register=()=>{
+    navigate("/register");
+  }
 
   return (
     <div className="container py-5 mt-3">
@@ -117,7 +122,7 @@ function AboutUs() {
                   <i className="bi bi-person-circle" style={{fontSize: '5rem'}}></i>
                </div>
                <h4 className="fw-bold mb-4">Registration <br /> & <br /> Online Admission</h4>
-               <button className="btn btn-light rounded-pill px-4 mt-4 fw-bold text-primary text-uppercase shadow-sm py-2">
+               <button className="btn btn-light rounded-pill px-4 mt-4 fw-bold text-primary text-uppercase shadow-sm py-2" onClick={register}>
                  Register Now
                </button>
             </div>
