@@ -27,11 +27,10 @@ function GetAllVideos() {
     }
   };
 
-  // Load data on page load
   useEffect(() => {
-    fetchVideos();
-    fetchCourses();
-  }, []);
+  fetchVideos();
+  fetchCourses();
+}, []);
 
   // Delete video
   const deleteVideo = async (id) => {
@@ -70,22 +69,26 @@ function GetAllVideos() {
       <h2 className="text-center mb-4">All Videos</h2>
 
       {/*Filter*/}
-        <div className="col-md-4 mb-3">
-          <label className="fw-semibold">Search by Course</label>
-          <select
-            className="form-select"
-            value={selectedCourse}
-            onChange={(e) => setSelectedCourse(e.target.value)}
-          >
-            <option value="all">All Courses</option>
+      <div className="col-md-4 mb-3">
+        <label className="fw-semibold">Search by Course</label>
+        <select
+          className="form-select"
+          value={selectedCourse}
+          onChange={(e) => setSelectedCourse(e.target.value)}
+        >
+          <option value="all">All Courses</option>
 
-            {courses.map((course) => (
-              <option key={course.course_id} value={course.course_name}>
-                {course.course_name}
-              </option>
-            ))}
-          </select>
-        </div>
+          {courses.map((course) => (
+            <option
+              key={course.course_id}
+              value={course.course_name}
+            >
+              {course.course_name}
+            </option>
+          ))}
+        </select>
+      </div>
+
 
 
       {/*Table */}
