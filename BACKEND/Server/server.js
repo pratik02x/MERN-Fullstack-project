@@ -2,7 +2,7 @@ const express=require("express");
 const cors = require("cors");
 const path = require('path');
 
-const app=express();
+const app=express()
 
 const {authuser,authorization}=require("./utils/auth");
 const commenApi=require("./routes/common_Api");
